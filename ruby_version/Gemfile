@@ -3,19 +3,20 @@ source 'https://rubygems.org'
 gem 'dotenv'
 gem 'json'
 gem 'pry'
+gem 'puma'
+gem 'rack-unreloader'
+gem 'rackup'
 gem 'rake'
-gem 'sassc'
+gem 'sass-embedded'
 gem 'sinatra'
 gem 'sinatra-activerecord'
+gem 'sinatra-contrib'
 gem 'sinatra-static-assets'
 gem 'sqlite3'
-gem 'rackup'
-gem 'puma'
 
 group :development do
   gem 'foreman'
   gem 'rubocop'
-  gem 'sqlite3'
 end
 
 group :test do

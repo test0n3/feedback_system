@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'sinatra'
-require 'sinatra/reloader'
+# require 'sinatra/reloader'
 require 'sinatra/activerecord'
 require './helpers'
 require 'securerandom'
@@ -17,7 +19,8 @@ class App < Sinatra::Base
 
   options '*' do
     response.headers['Allow'] = 'HEAD,GET,PUT,DELETE,OPTIONS,POST'
-    response.headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept'
+    response.headers['Access-Control-Allow-Headers'] =
+      'X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept'
   end
 
   get '/' do

@@ -7,4 +7,4 @@ ActiveRecord::Base.configurations = YAML.load_file(config_path)
 ActiveRecord::Base.establish_connection(:development)
 
 # Loads all models
-Dir["#{__dir__}/../models/*.rb"]./each { |file| require file }
+Dir["#{__dir__}/../models/*.rb"].each { |file| require file }
