@@ -24,6 +24,35 @@ class App < Sinatra::Base
   end
 
   get '/' do
+    @feedback = {}
+    @errors = []
     erb :index
+  end
+
+  post '/' do
+    @feedback = params[:feedback] || {}
+    @errors = []
+
+    if @feedback['qualifications'].nil? || @feedback['qualifications'].empty?
+      @errors << "You must select a qualification rating."
+    end
+
+    if @feedback['description'].nil? || @feedback['description'].strip.empty?
+      @errors << "Description cannot be blank."
+    end
+
+    # Check if validations passed
+    if @errors.empty?
+      # Logic to save to database goes here (e.g., Feedback.create(@feedback))
+      "Feedback saved successfully! Rating: #{@feedback['qualifications']}, Description: #{@feedback['description']}"
+    else
+      # Halt and re-render the form.
+      # @feedback and @errors are passed back to the view to show the user's input and errors.
+      erb :index
+    end
+  end
+
+  get '/admin' do
+    "Hello world"
   end
 end
