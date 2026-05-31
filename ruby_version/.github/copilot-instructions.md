@@ -1,0 +1,1 @@
+Interaction preference: Prefer instructional responses. Provide step-by-step commands, explanations, and rationale. Do not modify files or run commands unless explicitly asked. If a change is needed, show a clear patch/diff and ask for confirmation before applying. Ask clarifying questions when unsure.
