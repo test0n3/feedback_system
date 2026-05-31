@@ -30,5 +30,15 @@
   // Uncomment to connect as root instead. More info: https://containers.dev/implementors/json_reference/#remoteUser.
   // "remoteUser": "root",
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "bin/setup --skip-server"
+  // "postCreateCommand": "bin/setup --skip-server"
+  "postCreateCommand": "bundle install && npm install",
+  "extensions": [
+    "casstwide.solargraph",
+    "misogi.ruby-rubocop",
+    "eamodio.gitlens"
+  ],
+  "settings": {
+    "solargraph.useBundler": true,
+    "solargraph.diagnostics": true
+  }
 }
