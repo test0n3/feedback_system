@@ -26,9 +26,9 @@
               <% (1..5).each do |num| %>
                 <label style="margin-right: 15px;">
                   <input type="radio"
-                         name="feedback[qualifications]"
+                         name="feedback[qualification]"
                          value="<%= num %>"
-                         <%= 'checked' if @feedback && @feedback['qualifications'].to_i == num %>>
+                         <%= 'checked' if @feedback && @feedback['qualification'].to_i == num %>>
                   <%= num %>
                 </label>
               <% end %>
