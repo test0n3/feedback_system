@@ -177,3 +177,6 @@ fabric.properties
 # Tailwindcss CLI
 # standalone tailwindcss v 4.3.0
 tailwindcss
+
+# DB protection
+db/*.sqlite3
