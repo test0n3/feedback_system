@@ -180,3 +180,6 @@ tailwindcss
 
 # DB protection
 db/*.sqlite3
+db/*.sqlite
+db/*.db
+db/*.sqlite-journal
