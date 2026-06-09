@@ -6,4 +6,18 @@ db/*.sqlite3-journal
 
 # node_modules
 node_modules
-node_modules/
+
+# pnpm
+.pnpm-store
+
+# Local dev files + editors
+.DS_Store
+
+# logs, tmp, coverage, build artifacts
+*.log
+tmp/
+coverage/
+
+# Git metadata
+.git
+.gitignore

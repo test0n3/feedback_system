@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+# db setup
 DB_FILE="db/development/app.sqlite3"
 if [ ! -f "$DB_FILE" ]; then
   echo "DB not found - creating and migrating..."

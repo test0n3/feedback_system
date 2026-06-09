@@ -2,9 +2,10 @@
   "name": "feedback-system",
   "private": true,
   "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
     "tailwindcss": "^4.3.0"
   },
-  "packageManager": "pnpm@latest",
+  "packageManager": "pnpm@11.5.2",
   "scripts": {
     "build:css": "tailwindcss -i stylesheets/input.css -o public/styles.css",
     "watch:css": "tailwindcss -i stylesheets/input.css -o public/styles.css --watch"
