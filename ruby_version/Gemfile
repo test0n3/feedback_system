@@ -4,10 +4,8 @@ gem 'dotenv'
 gem 'json'
 gem 'pry'
 gem 'puma'
-gem 'rack-unreloader'
 gem 'rackup'
 gem 'rake'
-gem 'sass-embedded'
 gem 'sinatra'
 gem 'sinatra-activerecord'
 gem 'sinatra-contrib'
@@ -17,6 +15,8 @@ gem 'sqlite3'
 group :development do
   gem 'dawnscanner'
   gem 'foreman'
+  gem 'rack-unreloader'
+
   gem 'rubocop'
 end
 

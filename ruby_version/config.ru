@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'sinatra'
-require 'sass-embedded'
-require 'rack/unreloader'
-require './app'
+# require 'sinatra'
+# require 'sass-embedded'
+# require 'rack/unreloader'
+# require './app'
 
 # Sassc
 # template = File.read('stylesheets/style.scss')
@@ -27,13 +27,26 @@ require './app'
 # File.write('public/style.css', compressed.css)
 
 # Using sass-embedded
-compressed = Sass.compile('stylesheets/style.scss', style: :compressed)
-File.write('public/style.css', compressed.css)
+# compressed = Sass.compile('stylesheets/style.scss', style: :compressed)
+# File.write('public/style.css', compressed.css)
+
+# system('./tailwindcss -i stylesheets/input.css -o public/styles.css')
+#
+# if ENV['RACK_ENV'] != 'production'
+#   Thread.new do
+#     system('./tailwindcss -i stylesheets/input.css -o public/styles.css --watch')
+#   end
+# end
 
 # run App
 
-# using rack-unreloader instead of App
-Unreloader = Rack::Unreloader.new { App }
-Unreloader.require './app.rb'
-
-run Unreloader
+# using rack-unreloader only for development environment
+if ENV['RACK_ENV'] == 'development'
+  require 'rack/unreloader'
+  Unreloader = Rack::Unreloader.new { App }
+  Unreloader.require './app.rb'
+  run Unreloader
+else
+  require_relative 'app'
+  run App
+end

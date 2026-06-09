@@ -4,18 +4,22 @@
   "name": "feedback_system",
   "dockerComposeFile": "compose.yaml",
   "service": "ruby-app",
+  "remoteUser": "vscode",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "containerEnv": {
+    "RACK_ENV": "development"
+  },
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/rails/devcontainer/features/activestorage": {},
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
       "moby": false
     },
-    "ghcr.io/rails/devcontainer/features/sqlite3": {}
-  },
-  "containerEnv": {
-    "KAMAL_REGISTRY_PASSWORD": "$KAMAL_REGISTRY_PASSWORD"
+    "ghcr.io/rails/devcontainer/features/sqlite3": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22.22.3",
+      "pnpmVersion": "latest"
+    }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
@@ -28,7 +32,7 @@
     },
     "vscode": {
       "extensions": [
-        "casstwide.solargraph",
+        "castwide.solargraph",
         "misogi.ruby-rubocop",
         "eamodio.gitlens"
       ],
@@ -42,5 +46,5 @@
   // "remoteUser": "root",
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "bin/setup --skip-server"
-  "postCreateCommand": "bundle install && npm install",
+  "postCreateCommand": "bundle install && pnpm install && .devcontainer/post-create.sh"
 }
