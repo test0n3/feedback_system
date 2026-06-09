@@ -1,4 +1,9 @@
+# SQLite3 file
 db/*.sqlite3
 db/*.sqlite
 db/*.db
 db/*.sqlite3-journal
+
+# node_modules
+node_modules
+node_modules/
