@@ -3,13 +3,19 @@
     <div class="flex flex-col gap-2 z-10">
         <h1 class="font-h1 text-h1 text-primary tracking-tight">Share your experience</h1>
         <p class="font-body-lg text-body-lg text-secondary">Your feedback helps us to improve our services</p>
+      <% if flash[:notice] %>
+        <div class="mb-4 text-green-700"><%= h(flash[:notice]) %>></div>
+      <% end %>
+      <% if flash[:error] %>
+        <div class="mb-4 text-red-700"><%= h(flash[:error]) %></div>
+      <% end %>
       <!-- 1. Display Global Error Messages if validation fails -->
       <% if @errors && @errors.any? %>
         <div style="color: red; margin-bottom: 20px;">
           <strong>Please correct the following errors:</strong>
           <ul>
             <% @errors.each do |error| %>
-              <li><%= error %></li>
+              <li><%= h(error) %></li>
             <% end %>
           </ul>
         </div>
@@ -42,8 +48,9 @@
               name="feedback[description]"
               class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest p-4 font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-y min-h-[120px]"
               placeholder="Share specific details, suggestions, or issues you encountered..."
-              rows="5"
-            ><%= @feedback['description'] if @feedback %></textarea>
+              rows="5">
+              <%= h(@feedback['description']) if @feedback && @feedback['description'] %>
+            </textarea>
           </div>
           <hr class="border-t border-outline-variant opacity-50 my-2" />
           <div class="flex justify-end mt-2">
