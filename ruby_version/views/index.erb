@@ -4,7 +4,7 @@
         <h1 class="font-h1 text-h1 text-primary tracking-tight">Share your experience</h1>
         <p class="font-body-lg text-body-lg text-secondary">Your feedback helps us to improve our services</p>
       <% if flash[:notice] %>
-        <div class="mb-4 text-green-700"><%= h(flash[:notice]) %>></div>
+        <div class="mb-4 text-green-700"><%= h(flash[:notice]) %></div>
       <% end %>
       <% if flash[:error] %>
         <div class="mb-4 text-red-700"><%= h(flash[:error]) %></div>
@@ -34,7 +34,7 @@
                   <input type="radio"
                          name="feedback[qualification]"
                          value="<%= num %>"
-                         <%= 'checked' if @feedback && @feedback['qualification'].to_i == num %>>
+                         <%= 'checked' if @feedback && @feedback['qualification'].to_s == num.to_s %>>
                   <%= num %>
                 </label>
               <% end %>

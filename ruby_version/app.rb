@@ -4,7 +4,8 @@ require 'sinatra'
 # require 'sinatra/reloader'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
-require_relative 'helpers/helpers'
+# require_relative 'helpers/helpers'
+require_relative 'config/application'
 require 'securerandom'
 
 # enable :sessions
@@ -30,8 +31,8 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    @feedback = {}
-    @errors = []
+    # @feedback = {}
+    # @errors = []
     erb :index
   end
 
@@ -44,6 +45,7 @@ class App < Sinatra::Base
     qual = (@feedback['qualification'].to_s.strip == '' ? nil : @feedback['qualification'].to_i)
     desc = (@feedback['description'] || '').strip
 
+    # puts "qual: #{qual}, desc: #{desc}"
     # if qual.nil?
     #   @errors << 'You must select a qualification rating.'
     # end
