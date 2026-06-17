@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_06_152640) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_17_042033) do
   create_table "feedbacks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description"
-    t.integer "qualification", default: 0
-    t.integer "status", default: 0
+    t.integer "qualification"
+    t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
   end
 end
