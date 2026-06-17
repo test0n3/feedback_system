@@ -8,7 +8,7 @@
 
 ## Development configuration
 
-[Devcontainers]() use is recomended. Use is possible with [VSCode]() and [Rubymine]().
+[Devcontainers](https://containers.dev/) use is recommended. Use is possible with [VSCode](https://code.visualstudio.com/) and [Rubymine](https://www.jetbrains.com/ruby/).
 Don't forget to run:
 
 ```console
@@ -27,3 +27,6 @@ foreman start -f Procfile.dev
 ```
 RACK_ENV=development
 ```
+
+## Notes
+`enum`s don't work with **rake**, so a constant was defined to manage the status of feedback.
