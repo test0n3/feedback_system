@@ -3,14 +3,20 @@
 require 'sinatra'
 # require 'sinatra/reloader'
 require 'sinatra/activerecord'
-require './helpers'
+require 'sinatra/flash'
+require_relative 'helpers/helpers'
 require 'securerandom'
+
+# enable :sessions
 
 class App < Sinatra::Base
   configure do
-    set :json_encoder, :to_json
+    enable :sessions
+    register Sinatra::Flash
+    # set :json_encoder, :to_json
     set :erb, layout: :layout
   end
+
   before do
     headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
     headers['Access-Control-Allow-Origin'] = '*'
@@ -29,27 +35,51 @@ class App < Sinatra::Base
     erb :index
   end
 
+  helpers ViewHelpers
+
   post '/' do
     @feedback = params[:feedback] || {}
-    @errors = []
+    # @errors = []
 
-    if @feedback['qualification'].nil? || @feedback['qualification'].empty?
-      @errors << "You must select a qualification rating."
-    end
+    qual = (@feedback['qualification'].to_s.strip == '' ? nil : @feedback['qualification'].to_i)
+    desc = (@feedback['description'] || '').strip
 
-    if @feedback['description'].nil? || @feedback['description'].strip.empty?
-      @errors << "Description cannot be blank."
+    # if qual.nil?
+    #   @errors << 'You must select a qualification rating.'
+    # end
+    #
+    # if desc.nil? || desc.empty?
+    #   @errors << 'Description cannot be blank.'
+    # end
+
+    feedback = Feedback.new(qualification: qual, description: desc)
+
+    if feedback.save
+      flash[:notice] = 'Thanks - your feedback was saved.'
+      redirect '/'
+    else
+      # Surface model errors to the view and repopulate the form
+      @errors = feedback.errors.full_messages
+      @feedback = { 'qualification' => qual, 'description' => desc }
+      erb :index
     end
 
     # Check if validations passed
-    if @errors.empty?
+    # if @errors.empty?
       # Logic to save to database goes here (e.g., Feedback.create(@feedback))
-      "Feedback saved successfully! Rating: #{@feedback['qualification']}, Description: #{@feedback['description']}"
-    else
+      # feedback = Feedback.new(qualification: qual, description: desc)
+      # if feedback.save
+      #   flash[:notice] = "Thanks - your feedback has been saved."
+      #   redirect '/'
+      # end
+      # "Feedback saved successfully! Rating: #{@feedback['qualification']}, Description: #{@feedback['description']}"
+    # else
       # Halt and re-render the form.
       # @feedback and @errors are passed back to the view to show the user's input and errors.
-      erb :index
-    end
+      # @errors = feedback.errors.full_messages
+      # @feedback = { 'qualification' => qual, 'description' => desc }
+      # erb :index
+    # end
   end
 
   get '/admin' do
