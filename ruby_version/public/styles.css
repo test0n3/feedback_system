@@ -240,6 +240,9 @@
   .flex {
     display: flex;
   }
+  .hidden {
+    display: none;
+  }
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
