@@ -11,3 +11,14 @@ Dir["#{__dir__}/../models/*.rb"].each { |model_file| require model_file }
 
 # Loads all helpers
 Dir["#{__dir__}/../helpers/*.rb"].sort.each { |helper_file| require helper_file}
+
+# using rack-cors
+# use Rack::Cors do
+#   allow do
+#     origins ENV.fetch('ALLOWED_ORIGINS', 'http://localhost:3000').split(',')
+#     resource '*',
+#              headers: :any,
+#              methods: [:get, :post, :put, :options],
+#              credentials: ENV['ALLOW_CREDENTIALS'] == 'true'
+#   end
+# end
