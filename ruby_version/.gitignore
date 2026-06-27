@@ -175,10 +175,10 @@ fabric.properties
 .idea/*
 
 # DB protection
-db/*.sqlite3
-db/*.sqlite
-db/*.db
-db/*.sqlite-journal
+db/**/*.sqlite3
+db/**/*.sqlite
+db/**/*.db
+db/**/*.sqlite-journal
 
 # env files
 .env
