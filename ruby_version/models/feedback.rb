@@ -15,7 +15,8 @@ class Feedback < ActiveRecord::Base
   end
 
   def status=(val)
-    super(STATUSES[val.to_sym] || val.to_i)
+    # super(STATUSES[val.to_sym] || val.to_i)
+    super(val.is_a?(Integer) ? val : (STATUSES[val.to_sym] || val.to_i))
   end
 
   before_validation :normalize_fields
