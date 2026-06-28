@@ -32,7 +32,7 @@ class App < Sinatra::Base
       end
 
       def csrf_tag
-        %Q(<input type="hidden" name="authenticity_token" value="#{h(csrf_token)}">)
+        %(<input type="hidden" name="authenticity_token" value="#{h(csrf_token)}">)
       end
     end
     helpers ViewHelpers

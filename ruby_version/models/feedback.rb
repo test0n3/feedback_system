@@ -37,4 +37,3 @@ class Feedback < ActiveRecord::Base
     self.status = 0 if status.nil?
   end
 end
-

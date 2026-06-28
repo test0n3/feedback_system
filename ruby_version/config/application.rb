@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_record'
 require 'sqlite3'
 require 'yaml'
@@ -10,7 +12,7 @@ ActiveRecord::Base.establish_connection(:development)
 Dir["#{__dir__}/../models/*.rb"].each { |model_file| require model_file }
 
 # Loads all helpers
-Dir["#{__dir__}/../helpers/*.rb"].sort.each { |helper_file| require helper_file}
+Dir["#{__dir__}/../helpers/*.rb"].sort.each { |helper_file| require helper_file }
 
 # using rack-cors
 # use Rack::Cors do
