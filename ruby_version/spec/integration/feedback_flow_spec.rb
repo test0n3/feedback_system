@@ -42,7 +42,7 @@ describe 'Feedback submission' do
       post '/', { feedback: { qualification: '', description: 'No rating' }, authenticity_token: csrf_token }
 
       expect(last_response.status).to eq 200
-      expect(last_response.body).to include("can&#39;t be blank")
+      expect(last_response.body).to include('can&#39;t be blank')
       expect(Feedback.count).to eq 0
     end
 
@@ -53,7 +53,7 @@ describe 'Feedback submission' do
       post '/', { feedback: { qualification: '3', description: '   ' }, authenticity_token: csrf_token }
 
       expect(last_response.status).to eq 200
-      expect(last_response.body).to include("can&#39;t be blank")
+      expect(last_response.body).to include('can&#39;t be blank')
       expect(Feedback.count).to eq 0
     end
 
@@ -79,7 +79,7 @@ describe 'Feedback submission' do
       post '/', { feedback: { qualification: '3', description: '<script> alert("xss")</script>' }, authenticity_token: csrf_token }
 
       follow_redirect!
-      expect(Feedback.last.description).to eq("<script> alert(\"xss\")</script>")
+      expect(Feedback.last.description).to eq('<script> alert("xss")</script>')
       expect(last_response.body).not_to include('<script>')
     end
 
