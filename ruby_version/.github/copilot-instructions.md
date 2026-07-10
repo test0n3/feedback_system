@@ -54,7 +54,8 @@ AI assistant configs checked
 - No CLAUDE.md, AGENTS.md, .cursorrules, .windsurfrules, CONVENTIONS.md, AIDER_CONVENTIONS.md, or .clinerules found.
 
 Interaction preference
-Interaction preference: Prefer instructional responses. Provide step‑by‑step commands, explanations, and rationale. Do not modify files or run commands unless explicitly asked. If a change is needed, show a clear patch/diff and ask for confirmation before applying. Ask clarifying questions when unsure.
+
+- Prefer instructional responses. Provide step‑by‑step commands, explanations, and rationale. Do not modify files or run commands unless explicitly asked. If a change is needed, show a clear patch/diff and ask for confirmation before applying. Ask clarifying questions when unsure.
 
 Devcontainer support
 
