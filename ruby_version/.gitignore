@@ -179,6 +179,7 @@ db/**/*.sqlite3
 db/**/*.sqlite
 db/**/*.db
 db/**/*.sqlite-journal
+db/**/*
 
 # env files
 .env
