@@ -24,4 +24,4 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-      - run: bin/rubocop -f github
+      - run: bundle exec rubocop -f github

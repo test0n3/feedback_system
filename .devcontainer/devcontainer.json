@@ -27,7 +27,7 @@
   ],
   // Configure tool-specific properties.
   "customizations": {
-    "jetbrains": {
+    "JetBrains": {
       "backend": "RubyMine"
     },
     "vscode": {
