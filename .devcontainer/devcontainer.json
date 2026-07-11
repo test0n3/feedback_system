@@ -18,7 +18,7 @@
     "ghcr.io/rails/devcontainer/features/sqlite3": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "22.22.3",
-      "pnpmVersion": "11.5.2"
+      "pnpmVersion": "11.11.0"
     }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -27,7 +27,7 @@
   ],
   // Configure tool-specific properties.
   "customizations": {
-    "jetbrains": {
+    "JetBrains": {
       "backend": "RubyMine"
     },
     "vscode": {
