@@ -25,3 +25,35 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
       - run: bundle exec rubocop -f github
+
+  brakeman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Run Brakeman
+        continue-on-error: true
+        run: bundle exec brakeman --force-scan -q -f json -o brakeman.json
+      - name: Upload Brakeman report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: brakeman-report
+          path: brakeman.json
+      - name: Fail on High/Medium Brakeman findings
+        run: | 
+          if [ ! -f brakeman.json ]; then
+            echo "No Brakeman report produced"
+            exit 1;
+          fi
+          count=$(jq '[.warnings[] | select(.confidence=="High" or .confidence=="Medium")] | length' brakeman.json)
+          if [ "$count" -gt 0 ]; then
+            echo "Brakeman found $count High/Medium warnings"
+            jq '.warnings[] | select(.confidence=="High" or .confidence=="Medium")' brakeman.json
+            exit 1
+          fi
