@@ -34,4 +34,3 @@ RACK_ENV=development
 ## Notes
 
 `enum`s don't work with **rake**, so a constant was defined to manage the status of feedback.
-
