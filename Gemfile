@@ -17,6 +17,7 @@ gem 'sinatra-static-assets'
 gem 'sqlite3'
 
 group :development do
+  gem 'brakeman', require: false
   gem 'bundler-audit'
   gem 'foreman'
   gem 'rack-unreloader'
