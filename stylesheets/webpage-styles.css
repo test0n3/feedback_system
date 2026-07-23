@@ -7,12 +7,76 @@
 }
 
 body {
-    @apply bg-surface-container-low min-h-screen flex items-center justify-center p-4
-    md:p-8 font-body-md text-on-surface antialiased
+    @apply bg-surface-container-low min-h-screen flex items-center justify-center p-4 md:p-8 font-body-md text-on-surface antialiased
 }
 
-main {}
+main {
+    @apply w-full max-w-2xl bg-surface-container-lowest rounded-xl border border-outline-variant p-6 md:p-10 flex flex-col gap-8 relative overflow-hidden
+}
+
+header {
+    @apply flex flex-col gap-2 z-10
+}
+
+#logo {
+    @apply mx-auto my-0 mb-2
+}
+
+header > h2 {
+    @apply font-h1 text-h1 text-primary tracking-tight font-bold
+}
+
+header > p {
+    @apply font-body-lg text-body-lg text-secondary
+}
+
+form {
+    @apply flex flex-col gap-8 z-10
+}
+
+#qualification-fieldset {
+    @apply flex flex-col gap-3
+}
+
+#qualification-fieldset > legend {
+    @apply font-label-md text-label-md text-on-surface-variant mb-1 font-semibold
+}
+
+#rating-group {
+    @apply flex flex-wrap gap-3 sm:gap-4 justify-between sm:justify-start
+}
+
+#rating-group p {
+    @apply font-label-md text-label-md text-on-surface-variant text-center
+}
+
+#description-container {
+    @apply flex flex-col gap-2
+}
+
+#description-container > label {
+    @apply font-label-md text-label-md text-on-surface-variant font-semibold
+}
+
+#description-container > textarea {
+    @apply w-full rounded-lg border border-outline-variant bg-surface-container-lowest p-4 font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-y min-h-[120px]
+}
+
+hr {
+    @apply border-t border-outline-variant opacity-50 my-2
+}
+
+.button-container {
+    @apply flex justify-end mt-2
+}
+
+.button-container > button {
+    @apply w-full sm:w-auto px-6 py-3 h-12 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 transition-all hover:bg-primary-container hover:text-on-primary-container active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 shadow-sm font-semibold
+}
+
+.button-container > button > span {
+    @apply text-[18px] transition-transform
+}
 
 .flash-message-space {}
 
-h1 {}
