@@ -30,13 +30,29 @@ header > p {
     @apply font-body-lg text-body-lg text-secondary
 }
 
+.error-container {
+    @apply ml-4
+}
+
+.error-container > p {
+    @apply font-label-md text-label-md font-semibold text-red-500 mb-1
+}
+
+.error-container > ul {
+    @apply list-disc
+}
+
+.error-container > ul > li {
+    @apply font-label-md text-label-md font-semibold text-red-400 ml-5
+}
+
 form {
     @apply flex flex-col gap-8 z-10
 }
 
-#qualification-fieldset {
-    @apply flex flex-col gap-3
-}
+/*#qualification-fieldset {*/
+/*    @apply flex flex-col gap-3*/
+/*}*/
 
 #qualification-fieldset > legend {
     @apply font-label-md text-label-md text-on-surface-variant mb-1 font-semibold
