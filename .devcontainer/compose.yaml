@@ -1,4 +1,4 @@
-name: "feedback_system"
+name: "feedback_system_ruby"
 
 services:
   ruby-app:
@@ -7,7 +7,7 @@ services:
       dockerfile: .devcontainer/Dockerfile
 
     volumes:
-      - ..:/workspaces/ruby_version:cached
+      - ..:/workspaces/feedback_system_ruby:cached
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
