@@ -31,14 +31,12 @@ link_mise_dir() {
     || echo "WARNING: could not link $link_path -> $source" >&2
 }
 
-echo "DEBUG: XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-unset}" >&2
 if [ -d "$ROOT_JB/config" ]; then
   link_mise_dir "$HOME/.config/mise" "$ROOT_JB/config/mise"
 else
   echo "NOTE: $ROOT_JB/config not present; skipping RubyMine mise config link" >&2
 fi
 
-echo "DEBUG: XDG_DATA_HOME=${XDG_DATA_HOME:-unset}" >&2
 if [ -d "$ROOT_JB/data" ]; then
   link_mise_dir "$HOME/.local/share/mise" "$ROOT_JB/data/mise"
 else
