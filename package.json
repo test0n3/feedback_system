@@ -3,11 +3,14 @@
   "private": true,
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.0",
+    "esbuild": "^0.28.2",
     "tailwindcss": "^4.3.0"
   },
   "packageManager": "pnpm@11.5.2",
   "scripts": {
-    "build:css": "tailwindcss -i stylesheets/input.css -o public/styles.css",
-    "watch:css": "tailwindcss -i stylesheets/input.css -o public/styles.css --watch"
+    "build:css": "tailwindcss -i stylesheets/input.css -o public/css/styles.css",
+    "watch:css": "tailwindcss -i stylesheets/input.css -o public/css/styles.css --watch",
+    "build:js": "esbuild javascript/user.js --bundle --outfile=public/js/output.js",
+    "watch:js": "esbuild javascript/user.js --bundle --outfile=public/js/output.js --watch"
   }
 }
