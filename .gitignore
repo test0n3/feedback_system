@@ -189,3 +189,10 @@ node_modules
 
 # pnpm
 .pnpm-store
+
+# Brakeman.json
+brakeman.json
+
+# ignote public content
+public/js/*.js
+public/css/*.css
