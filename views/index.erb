@@ -1,24 +1,21 @@
-<!--<main class="w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-ambient border border-outline-variant p-6 md:p-10 flex flex-col gap-8 relative overflow-hidden">-->
 <main class="shadow-ambient">
   <header>
-<!--  <header class="flex flex-col gap-2 z-10">-->
     <div id="logo" class="hidden">
-<!--    <div id="logo" class="mx-auto my-0">-->
-      <img width="150" height="150">
+      <img width="150" height="150" alt="company logo">
     </div>
     <h1 class="hidden">Customer Feedback</h1>
     <h2>Share your experience</h2>
     <p>Your feedback helps us to improve our services</p>
     <% if flash[:notice] %>
-      <div class="mb-4 text-green-700"><%= h(flash[:notice]) %></div>
+      <div class="text-green-700"><%= h(flash[:notice]) %></div>
     <% end %>
-    <% if flash[:error] %>
-      <div class="mb-4 text-red-700"><%= h(flash[:error]) %></div>
+    <% if @errors %>
+      <div class="text-red-700"><%= h(flash[:error]) %></div>
     <% end %>
     <!-- 1. Display Global Error Messages if validation fails -->
     <% if @errors && @errors.any? %>
-      <div style="color: red; margin-bottom: 20px;">
-        <strong>Please correct the following errors:</strong>
+      <div class="error-container">
+        <p>Please correct the following errors:</p>
         <ul>
           <% @errors.each do |error| %>
             <li><%= h(error) %></li>
@@ -27,42 +24,54 @@
       </div>
     <% end %>
   </header>
-  <form action="/" method="post">
+  <form action="/" method="post" class="no-js" id="feedback-form">
     <%= csrf_tag %>
-    <!-- Radio Buttons Group -->
-    <!-- TODO
-    change styles, starts in a row or buttons
-    -->
-    <!-- Qualifications (Radio Buttons 1 to 5) -->
     <fieldset id="qualification-fieldset">
       <legend>How would you rate your experience?</legend>
       <div id="rating-group">
         <% (1..5).each do |num| %>
-          <label class="mr-4">
-            <input type="radio"
-                   name="feedback[qualification]"
-                   value="<%= num %>"
-                   <%= 'checked' if @feedback && @feedback['qualification'].to_s == num.to_s %>>
-            <p><%= num %></p>
-          </label>
+          <div class="radio-btn">
+            <input
+              id="rating-<%= num %>"
+              type="radio"
+              name="feedback[qualification]"
+              value="<%= num %>"
+              <%= 'checked' if @feedback && @feedback['qualification'].to_s == num.to_s %>
+            >
+            <label for="rating-<%= num %>" class="radio-group"><%= num %></label>
+          </div>
+          <button
+            aria-label="Rate <%= num %> out of 5"
+            aria-pressed="<%= (@feedback && @feedback['qualification'].to_s == num.to_s) ? 'true' : 'false' %>"
+            class="rating-btn <%= 'active' if @feedback && @feedback['qualification'].to_s == num.to_s %>"
+            data-value="<%= num %>"
+            type="button"
+          >
+            <%= num %>
+          </button>
         <% end %>
       </div>
     </fieldset>
-    <!-- Text Field -->
     <div id="description-container">
       <label for="description">Tell us more about it</label>
       <textarea
         id="description"
         name="feedback[description]"
         placeholder="Share specific details, suggestions, or issues you encountered..."
-        rows="5"><%= h(@feedback['description']) if @feedback && @feedback['description'] %></textarea>
+        rows="5"
+      ><%= h(@feedback["description"]) if @feedback && @feedback["description"] %></textarea>
     </div>
     <hr id="bottom-divider"/>
     <div class="button-container">
       <button type="submit" class="group">
         Submit Feedback
-        <span class="group-hover:translate-x-1 material-symbols-outlined" data-icon="send">send</span>
+        <span
+          class="group-hover:translate-x-1 material-symbols-outlined"
+          data-icon="send"
+        >send</span>
       </button>
     </div>
   </form>
 </main>
+<script>document.getElementById('feedback-form').classList.replace('no-js', 'js')</script>
+<script type="module" src="js/output.js"></script>
