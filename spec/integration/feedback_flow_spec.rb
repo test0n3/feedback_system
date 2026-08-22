@@ -80,7 +80,7 @@ describe 'Feedback submission' do
 
       follow_redirect!
       expect(Feedback.last.description).to eq('<script> alert("xss")</script>')
-      expect(last_response.body).not_to include('<script>')
+      expect(last_response.body).not_to include('<script> alert("xss")</script>')
     end
 
     # it 'rejects invalid feedback' do

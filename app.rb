@@ -50,6 +50,7 @@ class App < Sinatra::Base
       redirect '/'
     else
       # Surface model errors to the view and repopulate the form
+      flash[:error] = 'Sorry, your feedback could not be saved.'
       @errors = feedback.errors.full_messages
       @feedback = { 'qualification' => qual, 'description' => desc }
       erb :index

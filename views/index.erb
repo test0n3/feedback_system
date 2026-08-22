@@ -1,64 +1,77 @@
-<main class="w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-ambient border border-outline-variant p-6 md:p-10 flex flex-col gap-8 relative overflow-hidden">
-  <!-- <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none">-->
-    <div class="flex flex-col gap-2 z-10">
-        <h1 class="font-h1 text-h1 text-primary tracking-tight">Share your experience</h1>
-        <p class="font-body-lg text-body-lg text-secondary">Your feedback helps us to improve our services</p>
-      <% if flash[:notice] %>
-        <div class="mb-4 text-green-700"><%= h(flash[:notice]) %></div>
-      <% end %>
-      <% if flash[:error] %>
-        <div class="mb-4 text-red-700"><%= h(flash[:error]) %></div>
-      <% end %>
-      <!-- 1. Display Global Error Messages if validation fails -->
-      <% if @errors && @errors.any? %>
-        <div style="color: red; margin-bottom: 20px;">
-          <strong>Please correct the following errors:</strong>
-          <ul>
-            <% @errors.each do |error| %>
-              <li><%= h(error) %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-        <form class="flex flex-col gap-8 z-10" action="/" method="post">
-          <%= csrf_tag %>
-          <!-- Radio Buttons Group -->
-          <!-- TODO
-          change styles, starts in a row or buttons
-          -->
-          <!-- Qualifications (Radio Buttons 1 to 5) -->
-          <fieldset class="flex flex-col gap-3">
-            <legend class="font-label-md text-label-md text-on-surface-variant mb-1">How would you rate your experience?</legend>
-            <div class="flex flex-wrap gap-3 sm:gap-4 justify-between sm:justify-start" id="rating-group">
-              <% (1..5).each do |num| %>
-                <label style="margin-right: 15px;">
-                  <input type="radio"
-                         name="feedback[qualification]"
-                         value="<%= num %>"
-                         <%= 'checked' if @feedback && @feedback['qualification'].to_s == num.to_s %>>
-                  <%= num %>
-                </label>
-              <% end %>
-            </div>
-          </fieldset>
-          <!-- Text Field -->
-          <div class="flex flex-col gap-2">
-            <label for="description" class="font-label-md text-label-md text-on-surface-variant">Tell us more about it</label>
-            <textarea
-              id="description"
-              name="feedback[description]"
-              class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest p-4 font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-y min-h-[120px]"
-              placeholder="Share specific details, suggestions, or issues you encountered..."
-              rows="5"><%= h(@feedback['description']) if @feedback && @feedback['description'] %></textarea>
-          </div>
-          <hr class="border-t border-outline-variant opacity-50 my-2" />
-          <div class="flex justify-end mt-2">
-            <button type="submit" class="w-full sm:w-auto px-6 py-3 h-12 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 transition-all hover:bg-primary-container hover:text-on-primary-container active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 shadow-sm group">
-              Submit Feedback
-              <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform" data-icon="send">send</span>
-            </button>
-          </div>
-        </form>
+<main class="shadow-ambient">
+  <header>
+    <div id="logo" class="hidden">
+      <img width="150" height="150" alt="company logo">
     </div>
-  <!-- </div> -->
+    <h1 class="hidden">Customer Feedback</h1>
+    <h2>Share your experience</h2>
+    <p>Your feedback helps us to improve our services</p>
+    <% if flash[:notice] %>
+      <div class="text-green-700"><%= h(flash[:notice]) %></div>
+    <% end %>
+    <% if @errors %>
+      <div class="text-red-700"><%= h(flash[:error]) %></div>
+    <% end %>
+    <!-- 1. Display Global Error Messages if validation fails -->
+    <% if @errors && @errors.any? %>
+      <div class="error-container">
+        <p>Please correct the following errors:</p>
+        <ul>
+          <% @errors.each do |error| %>
+            <li><%= h(error) %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </header>
+  <form action="/" method="post" class="no-js" id="feedback-form">
+    <%= csrf_tag %>
+    <fieldset id="qualification-fieldset">
+      <legend>How would you rate your experience?</legend>
+      <div id="rating-group">
+        <% (1..5).each do |num| %>
+          <div class="radio-btn">
+            <input
+              id="rating-<%= num %>"
+              type="radio"
+              name="feedback[qualification]"
+              value="<%= num %>"
+              <%= 'checked' if @feedback && @feedback['qualification'].to_s == num.to_s %>
+            >
+            <label for="rating-<%= num %>" class="radio-group"><%= num %></label>
+          </div>
+          <button
+            aria-label="Rate <%= num %> out of 5"
+            aria-pressed="<%= (@feedback && @feedback['qualification'].to_s == num.to_s) ? 'true' : 'false' %>"
+            class="rating-btn <%= 'active' if @feedback && @feedback['qualification'].to_s == num.to_s %>"
+            data-value="<%= num %>"
+            type="button"
+          >
+            <%= num %>
+          </button>
+        <% end %>
+      </div>
+    </fieldset>
+    <div id="description-container">
+      <label for="description">Tell us more about it</label>
+      <textarea
+        id="description"
+        name="feedback[description]"
+        placeholder="Share specific details, suggestions, or issues you encountered..."
+        rows="5"
+      ><%= h(@feedback["description"]) if @feedback && @feedback["description"] %></textarea>
+    </div>
+    <hr id="bottom-divider"/>
+    <div class="button-container">
+      <button type="submit" class="group">
+        Submit Feedback
+        <span
+          class="group-hover:translate-x-1 material-symbols-outlined"
+          data-icon="send"
+        >send</span>
+      </button>
+    </div>
+  </form>
 </main>
+<script>document.getElementById('feedback-form').classList.replace('no-js', 'js')</script>
+<script type="module" src="js/output.js"></script>

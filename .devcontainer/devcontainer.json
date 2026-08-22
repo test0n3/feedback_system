@@ -1,7 +1,7 @@
 // For format details, see https://containers.dev/implementors/json_reference/.
 // For config options, see the README at: https://github.com/devcontainers/templates/tree/main/src/ruby
 {
-  "name": "feedback_system",
+  "name": "feedback_system_ruby",
   "dockerComposeFile": "compose.yaml",
   "service": "ruby-app",
   "remoteUser": "vscode",
@@ -15,7 +15,7 @@
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
       "moby": false
     },
-    "ghcr.io/rails/devcontainer/features/sqlite3": {},
+    "ghcr.io/rails/devcontainer/features/sqlite3:1": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "22.22.3",
       "pnpmVersion": "11.11.0"
@@ -45,6 +45,7 @@
   // Uncomment to connect as root instead. More info: https://containers.dev/implementors/json_reference/#remoteUser.
   // "remoteUser": "root",
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "bin/setup --skip-server"
-  "postCreateCommand": "bundle install && pnpm install && .devcontainer/post-create.sh"
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "postAttachCommand": ".devcontainer/link-jetbrains-mise.sh",
+  "waitFor": "postCreateCommand"
 }

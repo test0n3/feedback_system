@@ -22,6 +22,7 @@ jobs:
           version: 11
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build:css
+      - run: pnpm run build:js
       - run: RACK_ENV=test bundle exec rake db:create db:migrate
       - run: bundle exec rake spec
 

@@ -1,2 +1,3 @@
 web: bundle exec puma -p 9292 -e development
 css: pnpm run watch:css
+js: pnpm run watch:js
